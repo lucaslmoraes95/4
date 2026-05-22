@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista 1 Exercício 2</title>
+</head>
+<body>
+<h1>Dias da Semana</h1>
+<form action="/verificar" method="post">
+<label for="numero">Digite um número:</label> <br>
+<input type="text" name="numero" value="<%= valores.numero %>"> <br>
+<button type="submit">Verificar</button>
+</form>
+<%
+       if(retorno){
+           
+       %>
+<h2>Dia da semana: <%= retorno.dia %></h2>
+<%    
+       }else{
+           
+       %>    
+<h2>Não temos retorno</h2>
+<%
+       }
+  %>
+</body>
+</html>
