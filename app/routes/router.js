@@ -1,37 +1,53 @@
 const express = require("express");
 const router = express.Router();
 
+
 router.get("/", (req, res)=>{
-   res.render("pages/index", {"retorno":null, "valores":{"numero":""}});
+    res.render("pages/index", {
+        "retorno": null,
+        "valores":{"nota1":"", "nota2":""}
+    });
 })
 
-router.post("/verificar", (req, res)=>{
-   // recuperar dados do formulário
-   let numero = parseInt(req.body.numero);
-   // realizar a manipulação
-   if(numero == 1){
-       var dia = "Domingo";
-   }else if(numero == 2){
-       var dia = "Segunda-feira";
-   }else if(numero == 3){
-       var dia = "Terça-feira";
-   }else if(numero == 4){
-       var dia = "Quarta-feira";
-   }else if(numero == 5){
-       var dia = "Quinta-feira";
-   }else if(numero == 6){
-       var dia = "Sexta-feira";
-   }else if(numero == 7){
-       var dia = "Sábado";
-   }else{
-       var dia = "Valor inválido!";
-   }
-   // formatar os dados resultantes
-   let objJson = {"dia": dia}
-   // enviar os dados para mesclar com o html
-   res.render("pages/index", {
-       "retorno": objJson,
-       "valores":{"numero": req.body.numero}
-   })
+
+router.post("/classificar", (req, res)=>{
+
+    // recuperar dados do formulário
+    let nota1 = parseFloat(req.body.nota1);
+    let nota2 = parseFloat(req.body.nota2);
+
+    // calcular média
+    let media = (nota1 + nota2) / 2;
+
+    // realizar a manipulação
+    if(media > 9 && media <= 10){
+        var conceito = "A";
+    }else if(media > 7.5 && media <= 9){
+        var conceito = "B";
+    }else if(media > 6 && media <= 7.5){
+        var conceito = "C";
+    }else if(media > 4 && media <= 6){
+        var conceito = "D";
+    }else{
+        var conceito = "E";
+    }
+
+    // formatar os dados resultantes
+    let objJson = {
+        "media": media.toFixed(2),
+        "conceito": conceito
+    }
+
+    // enviar os dados para mesclar com o html
+    res.render("pages/index", {
+        "retorno": objJson,
+        "valores":{
+            "nota1": req.body.nota1,
+            "nota2": req.body.nota2
+        }
+    })
+
 })
+
 module.exports = router;
+
