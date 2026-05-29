@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista 1 Exercício 2</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista 1 Exercício 4</title>
 </head>
 <body>
-<h1>Dias da Semana</h1>
-<form action="/verificar" method="post">
-<label for="numero">Digite um número:</label> <br>
-<input type="text" name="numero" value="<%= valores.numero %>"> <br>
-<button type="submit">Verificar</button>
-</form>
-<%
-       if(retorno){
+
+    <h1>Cálculo de Média e Conceito</h1>
+
+    <form action="/classificar" method="post">
+
+        <label for="nota1">Digite a primeira nota:</label> <br>
+
+        <input type="text" name="nota1" value="<%= valores.nota1 %>"> <br><br>
+
+        <label for="nota2">Digite a segunda nota:</label> <br>
+
+        <input type="text" name="nota2" value="<%= valores.nota2 %>"> <br><br>
+
+        <button type="submit">Classificar</button>
+
+    </form>
+
+    <% 
+        if(retorno){
+            
+    %>
+
+        <h2>Média: <%= retorno.media %></h2>
+
+        <h2>Conceito: <%= retorno.conceito %></h2>
+
+    <%    
+        }else{
            
-       %>
-<h2>Dia da semana: <%= retorno.dia %></h2>
-<%    
-       }else{
-           
-       %>    
-<h2>Não temos retorno</h2>
-<%
-       }
-  %>
+    %>    
+
+        <h2>Não temos retorno</h2>
+
+    <%
+        }
+    %>
+
 </body>
 </html>
